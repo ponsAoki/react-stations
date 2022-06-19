@@ -3,17 +3,27 @@ import * as React from 'react'
 
 
 export const BreedsSelect = (props) => {
-  const Add = props.breeds.map(Add => Add)
-  const handleChange = (e) => props.setSelectedBreed((props.breeds[e.target.value]))
+  console.log(props.breeds);
+  // const breeds = props.breeds
+  // const listBreeds = breeds.map((option) => <li key={option.toString}>{{option}}</li>)
   return (
-    <label>
-      Breeds List
-      <select value={props.selectedBreed} onChange={e => handleChange(e)}>
-        {
-          Add.map((address, key) => <option value={key}>{address}</option>)
-        }
-        
-      </select>
-    </label>
+    <div>
+      <label>
+        Breeds List
+        <select value={props.selectedBreed} onChange={props.handleChange}>
+          
+            <option>
+              {props.breeds}
+            </option>
+
+          
+
+
+          
+        </select>
+      </label>
+      <button>表示</button>
+
+    </div>
   )
 }

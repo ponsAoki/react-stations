@@ -12,13 +12,17 @@ export const DogListContainer = () => {
         fetch('https://dog.ceo/api/breeds/list/all')
             .then(res => res.json())
             .then((result) => {
-              setBreeds(result.message)
+              setBreeds(result.message.key)
             })
     }, [])
+  
+  const handleChange = event => {
+    setSelectedBreed(event.target.value)
+  }
     
   
   
   return (
-    <BreedsSelect breeds={breeds} selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed}/> 
+    <BreedsSelect breeds={breeds} selectedBreed={selectedBreed} handleChange={handleChange}/> 
   )
 }
