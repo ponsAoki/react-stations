@@ -4,6 +4,8 @@ import * as React from 'react'
 
 export const BreedsSelect = (props) => {
   console.log(props.breeds);
+  const option = props.breeds.map((data,index) => <option value={index}>{data}</option>)
+  // const option = 
   // const breeds = props.breeds
   // const listBreeds = breeds.map((option) => <li key={option.toString}>{{option}}</li>)
   return (
@@ -11,10 +13,12 @@ export const BreedsSelect = (props) => {
       <label>
         Breeds List
         <select value={props.selectedBreed} onChange={props.handleChange}>
+
+          {option}
           
-            <option>
-              {props.breeds}
-            </option>
+          {/* <option value={props.breeds}>
+          {props.breeds}
+            </option> */}
 
           
 
