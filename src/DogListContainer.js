@@ -6,46 +6,51 @@ import { BreedsSelect } from './BreedsSelect'
 
 export const DogListContainer = () => {
     const [breeds, setBreeds] = useState([])
-    const [selectedBreed, setSelectedBreed] = useState()
+  const [selectedBreed, setSelectedBreed] = useState("")
+  const [imgList, setImgList] = useState([])
 
     useEffect(() => {
         fetch('https://dog.ceo/api/breeds/list/all')
             .then(res => res.json())
-          .then((result) => {
-            const dogObj = result.message
-            const dogArr = []
-            for (var prop in dogObj) {
-              if (dogObj.hasOwnProperty(prop)) {
-                var innerObj = {}
-                innerObj[prop] = dogObj[prop]
-                dogArr.push(innerObj)
-              }
-            }
-            const resDogArr = []
-            for (let i = 0; i < dogArr.length; i++) {
-              const dogElm = Object.keys(dogArr[i])
-              console.log(dogElm[0]);
-              resDogArr.push(dogElm[0])
-              setBreeds(state => [...state, dogElm[0]])
-              console.log(breeds);
-            }
-            // const resArr = []
-            // dogObj.forEach(elm => {
-            //   Object.keys(elm).forEach(key => {
-            //     resArr.push(key)
-            //     setBreeds(defaArr => [...defaArr, key])
-            //   })
-            // })
+            .then((result) => {
+                const dogObj = [result.message]
+                    //以降は下記の1, 2どちらでもあり
+                    //1.
+                dogObj.forEach(elm => {
+                        Object.keys(elm).forEach(key => {
+                            setBreeds(defaArr => [...defaArr, key])
+                        })
+                    })
+                    //2.
+                    // const dogArr = []
+                    // for (var prop in dogObj) {
+                    //   if (dogObj.hasOwnProperty(prop)) {
+                    //     var innerObj = {}
+                    //     innerObj[prop] = dogObj[prop]
+                    //     dogArr.push(innerObj)
+                    //   }
+                    // }
+                    // for (let i = 0; i < dogArr.length; i++) {
+                    //   const dogElm = Object.keys(dogArr[i])
+                    //   console.log(dogElm[0]);
+                    //   setBreeds(state => [...state, dogElm[0]])
+                    //   console.log(breeds);
+                    // }
             })
     }, [])
-  
-  const handleChange = event => {
-    setSelectedBreed(event.target.value)
-  }
-    
-  
-  
-  return (
-    <BreedsSelect breeds={breeds} selectedBreed={selectedBreed} handleChange={handleChange}/> 
-  )
+    // const getImgList = (e) => {
+    //   fetch(`https://dog.ceo/api/breed/${e}/images/random/3`).then(res => res.json()).then((result) => {
+    //       const imgArr = [result.message]
+    //       imgArr.forEach((elm) => {
+    //         setImgList(arr => [...arr, elm])
+    //         console.log(imgList);
+    //       })
+    //       // console.log(selectedBreed);
+    //       })
+    // }
+
+
+
+  return (<BreedsSelect breeds={breeds} selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed} imgList={imgList} setImgList={setImgList} /> 
+    )
 }
